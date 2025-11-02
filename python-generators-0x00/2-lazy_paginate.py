@@ -10,7 +10,7 @@ def paginate_users(page_size: int, offset: int) -> List[Dict[str, Any]]:
         conn = seed.connect_to_prodev()
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
-            "SELECT user_id, name, email, age FROM user_data ORDER BY user_id LIMIT %s OFFSET %s",
+            "SELECT * FROM user_data LIMIT %s OFFSET %s",
             (page_size, offset)
         )
         rows = cursor.fetchall()
