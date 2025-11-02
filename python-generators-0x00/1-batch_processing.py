@@ -33,15 +33,20 @@ def stream_users_in_batches(batch_size: int) -> Generator[List[Dict[str, Any]], 
 		except Exception:
 			pass
 
-def batch_processing(batch_size: int) -> Generator[List[Dict[str, Any]], None, None]:
+
+def batch_processing(batch_size: int) -> Generator[List[Dict[str, Any]], None, int]:
 	"""
 	Processes each batch to filter users over the age of 25.
 	Yields lists of users (dicts) where age > 25, batch by batch.
+	Returns total count of filtered users at the end.
 	"""
+	total_filtered = 0
 	for batch in stream_users_in_batches(batch_size):
 		filtered = [user for user in batch if float(user['age']) > 25]
+		total_filtered += len(filtered)
 		if filtered:
 			yield filtered
+	return total_filtered
 
 if __name__ == '__main__':
 	# Example usage: print batches of users over age 25
