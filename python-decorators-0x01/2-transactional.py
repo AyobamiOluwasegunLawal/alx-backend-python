@@ -8,6 +8,7 @@ def with_db_connection(func):
 
         try:
             result = func(conn, *args, **kwargs)
+            print('Connection successful')
         finally:
             conn.close()
         return result
