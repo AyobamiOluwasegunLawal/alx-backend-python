@@ -5,11 +5,19 @@ from .models import Message, Conversation
 # Create your views here.
 
 class ConversationViewSet(viewsets.ModelViewSet):
-    queryset = Conversation.objects.all().order_by('-created_at')
     serializer_class = ConversationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+        return Conversation.objects.filter(
+            participants_id = self.request.user
+        ).order_by('-created_at')
+
 class MessageViewSet(viewsets.ModelViewSet):
-    queryset = Message.objects.all().order_by('-sent_at')
     serializer_class = MessageSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Message.objects.filter(
+            send_id = self.request.user
+        ).order_by('-sent_at')
