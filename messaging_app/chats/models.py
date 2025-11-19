@@ -45,9 +45,8 @@ class Conversation(models.Model):
         editable=True
     )
 
-    participants_id = models.ForeignKey(
+    participants_id = models.ManyToManyField(
         User,
-        on_delete=models.CASCADE,
         related_name='conversations'
     )
 
