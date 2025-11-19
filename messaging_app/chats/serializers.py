@@ -21,8 +21,8 @@ class ConversationSerializer(serializers.HyperlinkedModelSerializer):
         model = Conversation
         fields = '__all__'
 
-    def get_last_message(self, obj):
-        last_msg = obj.message_set.order_by('-sent_at').first()
+    def get_last_message(self, messagePayload):
+        last_msg = messagePayload.message_set.order_by('-sent_at').first()
         return last_msg.message_body if last_msg else None
     
     def validate(self, data):
