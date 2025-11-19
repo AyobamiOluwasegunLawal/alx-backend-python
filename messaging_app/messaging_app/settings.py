@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':[
-        'rest_framework.permission.isAuthenticated',
+        'rest_framework.permissions.isAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES':[
         'rest_framework.authentication.SessionAuthentication',
