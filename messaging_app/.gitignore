@@ -1,0 +1,5 @@
+.alx-backend-python-venv
+.venv_logstream/
+.env
+__pycache__/
+db.sqlite3
