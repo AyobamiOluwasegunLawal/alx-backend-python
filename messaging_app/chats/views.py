@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, viewsets, status, filters
 from .serializers import ConversationSerializer, MessageSerializer
 from .models import Message, Conversation
 # Create your views here.
@@ -7,6 +7,7 @@ from .models import Message, Conversation
 class ConversationViewSet(viewsets.ModelViewSet):
     serializer_class = ConversationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [filters.SearchFilter]
 
     def get_queryset(self):
         return Conversation.objects.filter(
@@ -16,6 +17,7 @@ class ConversationViewSet(viewsets.ModelViewSet):
 class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = MessageSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [filters.SearchFilter]
 
     def get_queryset(self):
         return Message.objects.filter(
